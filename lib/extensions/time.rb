@@ -8,8 +8,7 @@ class Time
     # workday.
     def end_of_workday(day)
       format = "%B %d %Y #{BusinessTime::Config.end_of_workday}"
-      Time.zone ? Time.zone.parse(day.strftime(format)) :
-          Time.parse(day.strftime(format))
+      Time.zone ? Time.zone.parse(day.strftime(format)) : Time.parse(day.strftime(format))
     end
 
     # Gives the time at the beginning of the workday, assuming that this time
@@ -18,15 +17,14 @@ class Time
     # workday.
     def beginning_of_workday(day)
       format = "%B %d %Y #{BusinessTime::Config.beginning_of_workday}"
-      Time.zone ? Time.zone.parse(day.strftime(format)) :
-          Time.parse(day.strftime(format))
+      Time.zone ? Time.zone.parse(day.strftime(format)) : Time.parse(day.strftime(format))
     end
 
     # True if this time is on a workday (between 00:00:00 and 23:59:59), even if
     # this time falls outside of normal business hours.
     def workday?(day)
       Time.weekday?(day) &&
-          !BusinessTime::Config.holidays.include?(day.to_date)
+      !BusinessTime::Config.holidays.include?(day.to_date)
     end
 
     # True if this time falls on a weekday.
@@ -43,10 +41,11 @@ class Time
       time > end_of_workday(time)
     end
 
+
+
     # Rolls forward to the next beginning_of_workday
     # when the time is outside of business hours
     def roll_forward(time)
-
       if (Time.before_business_hours?(time) || !Time.workday?(time))
         next_business_time = Time.beginning_of_workday(time)
       elsif Time.after_business_hours?(time)
@@ -58,9 +57,25 @@ class Time
       while !Time.workday?(next_business_time)
         next_business_time += 1.day
       end
-
       next_business_time
     end
-
+    
   end
+  
+  # ceil(5) : 06/14/2010 14:32:12 => 06/14/2010 14:35:00
+  def ceil(int)
+    hour  = self.strftime('%H').to_i
+    min   = self.strftime('%M').to_i
+    d     = min % int
+    
+    min += (int - d) if d != 0
+    
+    if min == 60
+      hour += 1
+      min = 0
+    end
+    
+    Time.zone.parse(self.strftime("%m/%d/%Y #{hour}:#{min}"))
+  end
+  
 end

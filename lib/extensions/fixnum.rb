@@ -5,14 +5,25 @@
 #  4.business_hours.before(some_date_time)
 class Fixnum
   include BusinessTime
+
+  def business_minutes
+    BusinessMinutes.new(self)
+  end
+  alias_method :business_minute, :business_minutes
   
   def business_hours
     BusinessHours.new(self)
   end
   alias_method :business_hour, :business_hours
-  
+
   def business_days
     BusinessDays.new(self)
   end
   alias_method :business_day, :business_days  
+  
+  # 18 => '18:00'
+  def to_time
+    "#{self}:00"
+  end
+  
 end

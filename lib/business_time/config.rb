@@ -22,13 +22,22 @@ module BusinessTime
       #   BusinessTime::Config.holidays << my_holiday_date_object
       # someplace in the initializers of your application.
       attr_accessor :holidays
+      
+      
+      # specifiy time blocks like this { :Monday => [11..15, 17..19], 
+      # :Friday => [14..20] } 
+      attr_accessor :business_time_blocks
 
     end
     
     def self.reset
+      Time.zone = 'Berlin'
       self.holidays = []
       self.beginning_of_workday = "9:00 am"
       self.end_of_workday = "5:00 pm"
+      
+      # default business time blocks
+      self.business_time_blocks = {:daily => [9..12, 15..18]}
     end
     
     # loads the config data from a yaml file written as:
@@ -40,6 +49,7 @@ module BusinessTime
     #       - Jan 1st, 2010
     #       - July 4th, 2010
     #       - Dec 25th, 2010
+    
     def self.load(filename)
       self.reset
       data = YAML::load(File.open(filename))
