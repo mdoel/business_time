@@ -4,35 +4,74 @@ class Hash
   # includes_date? is an instance method that you pass a date and it will return true
   # if the date matches the hash's time description
 
+
+
+
   def include_date?(date)
     # check if the hash has a day entry for the date's day
+    date = Time.zone.parse(date.to_s); i = 0
+    while i < 7
+      blocks = self[date.strftime('%A').to_sym]
 
-    # if date is a hash or string
-    date = Time.zone.parse(date.to_s)
+      if blocks # e.g. [9..12, 15..18, 19.25]
+        if i == 0 && result = self.match?(date, blocks)
+          return result
+        else
+          next_time = blocks.map do |b|
+            begin
+              min = date.strftime("%m/%d/%Y #{b.min.to_time}")
+              Time.zone.parse(min)
+            rescue
+              min = date.strftime("%m/%d/%Y #{b.to_time}")
+              Time.zone.parse(min)
+            end
+          end.select {|b| b > date}.sort.first
 
-    day = (times = self[date.strftime('%A').to_sym]) ? self.match?(date, times) : false
-    daily = (times = self[:daily]) ? self.match?(date, times) : false
-
-    day || daily
+          return [false, next_time] if next_time
+        end
+      end # if blocks 
+      date = date.beginning_of_day + 1.day
+      i += 1
+    end #while
   end
 
-  def match?(date, times)
+
+
+  # def include_date?(date)
+  #   # check if the hash has a day entry for the date's day
+  # 
+  #   # if date is a hash or string
+  #   date = Time.zone.parse(date.to_s)
+  # 
+  #   day = (times = self[date.strftime('%A').to_sym]) ? self.match?(date, times) : false
+  #   daily = (times = self[:daily]) ? self.match?(date, times) : false
+  # 
+  #   day || daily
+  # end
+
+
+
+
+
+  def match?(date, blocks)
     hour = date.strftime('%H').to_i
     minutes = (date.strftime('%M').to_i)/60.0
     ttime = hour + minutes # termin time 
     match = false
 
-    times.each do |time|
+    blocks.each do |time|
       if time.class == Range
         if time.include?(ttime)
-          min = Time.zone.parse(date.strftime("%m/%d/%Y #{time.min.to_time}"))
-          max = Time.zone.parse(date.strftime("%m/%d/%Y #{time.max.to_time}"))
-          match = [min,max]
+          match = [time.min, time.max].map do |t|
+            border = date.strftime("%m/%d/%Y #{t.send :to_time}")
+            Time.zone.parse(border)  
+          end
           break 
         end
       else   
         if time == ttime
-          minmax = Time.zone.parse(date.strftime("%m/%d/%Y #{time.to_time}"))
+          border = date.strftime("%m/%d/%Y #{time.to_time}")
+          minmax = Time.zone.parse(border)
           match = [minmax, minmax]
           break 
         end

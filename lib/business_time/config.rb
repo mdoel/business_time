@@ -37,7 +37,9 @@ module BusinessTime
       self.end_of_workday = "5:00 pm"
       
       # default business time blocks
-      self.business_time_blocks = {:daily => [9..12, 15..18]}
+      self.business_time_blocks = {
+        :Monday => [9..12, 15..18],
+        :Friday => [9..12, 15..18]}
     end
     
     # loads the config data from a yaml file written as:
