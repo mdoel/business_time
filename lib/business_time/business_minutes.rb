@@ -14,7 +14,7 @@ module BusinessTime
     def after(date_time)
       date_time = date_time.ceil(5)
       # Step through the hours, skipping over non-business hours
-      blocks = BusinessTime::Config.business_time_blocks
+      blocks = BusinessTime::Config.business_hours
 
       after_time = date_time + @minutes
       after_block = blocks.include_date?(after_time + @minutes)
@@ -35,7 +35,7 @@ module BusinessTime
     end
     
     def roll_to_workday(next_block)
-      blocks = BusinessTime::Config.business_time_blocks
+      blocks = BusinessTime::Config.business_hours
       
       while !Time.workday?(next_block)
         next_day = blocks.include_date?(next_block.beginning_of_day + 1.day)

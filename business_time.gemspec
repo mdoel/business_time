@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["bokmann"]
-  s.date = %q{2010-06-14}
+  s.date = %q{2010-06-15}
   s.description = %q{Have you ever wanted to do things like "6.business_days.from_now" and have weekends and holidays taken into account?  Now you can.}
   s.email = %q{dbock@codesherpas.com}
   s.extra_rdoc_files = [
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "business_time.gemspec",
      "lib/business_time.rb",
      "lib/business_time/business_days.rb",
      "lib/business_time/business_hours.rb",

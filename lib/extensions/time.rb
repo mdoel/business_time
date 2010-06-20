@@ -67,14 +67,12 @@ class Time
     hour  = self.strftime('%H').to_i
     min   = self.strftime('%M').to_i
     d     = min % int
-    
-    min += (int - d) if d != 0
+    min   += (int - d) if d != 0
     
     if min == 60
       hour += 1
       min = 0
     end
-    
     Time.zone.parse(self.strftime("%m/%d/%Y #{hour}:#{min}"))
   end
   

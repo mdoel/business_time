@@ -10,7 +10,7 @@ describe Hash do
     # if the date matches the hash's time description
     before(:each) do
       Time.zone = 'Berlin'
-      @hash = {:Friday => [9..12, 5.25], :Tuesday => [9..10, 18..22]}
+      @hash = {:Friday => ['09:00 - 12:00', '05:15'], :Tuesday => ['09:00 - 10:00', '18:00 - 22:00']}
     end
 
 

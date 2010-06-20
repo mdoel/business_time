@@ -8,9 +8,9 @@ describe BusinessTime::Config do
     end
 
     it "keep track of the start of the day" do
-      BusinessTime::Config.business_time_blocks.should  ==  {:Monday => [9..12, 15..18], :Friday => [9..12, 15..18]}
-      BusinessTime::Config.business_time_blocks         =   {:Monday => [9..11],  :Wednesday => [15..17]}
-      BusinessTime::Config.business_time_blocks.should  ==  {:Monday => [9..11],  :Wednesday => [15..17]}
+      BusinessTime::Config.business_hours.should  ==  {:Monday => ['09:00 - 12:00', '15:00 - 18:00'], :Friday => ['09:00 - 12:00', '15:00 - 18:00']}
+      BusinessTime::Config.business_hours         =   {:Monday => ['09:00 - 11:00'],  :Wednesday => ['15:00 - 17:00']}
+      BusinessTime::Config.business_hours.should  ==  {:Monday => ['09:00 - 11:00'],  :Wednesday => ['15:00 - 17:00']}
     end
 
   end

@@ -26,7 +26,7 @@ module BusinessTime
       
       # specifiy time blocks like this { :Monday => [11..15, 17..19], 
       # :Friday => [14..20] } 
-      attr_accessor :business_time_blocks
+      attr_accessor :business_hours
 
     end
     
@@ -37,9 +37,12 @@ module BusinessTime
       self.end_of_workday = "5:00 pm"
       
       # default business time blocks
-      self.business_time_blocks = {
-        :Monday => [9..12, 15..18],
-        :Friday => [9..12, 15..18]}
+      self.business_hours = {
+        :Monday => ['09:00 - 12:00', '15:00 - 18:00'],
+        :Friday => ['09:00 - 12:00', '15:00 - 18:00'] 
+      }
+      
+      
     end
     
     # loads the config data from a yaml file written as:
