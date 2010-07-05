@@ -27,6 +27,7 @@ class Hash
       date = date.beginning_of_day + 1.day
       i += 1
     end #while
+    [false, nil]
   end
 
 

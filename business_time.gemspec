@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["bokmann"]
-  s.date = %q{2010-06-15}
+  s.date = %q{2010-06-20}
   s.description = %q{Have you ever wanted to do things like "6.business_days.from_now" and have weekends and holidays taken into account?  Now you can.}
   s.email = %q{dbock@codesherpas.com}
   s.extra_rdoc_files = [
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/extensions/fixnum.rb",
      "lib/extensions/float.rb",
      "lib/extensions/hash.rb",
+     "lib/extensions/string.rb",
      "lib/extensions/time.rb",
      "lib/generators/business_time/config_generator.rb",
      "rails_generators/business_time_config/business_time_config_generator.rb",
@@ -45,6 +46,7 @@ Gem::Specification.new do |s|
      "spec/float_ext_spec.rb",
      "spec/hash_ext_spec.rb",
      "spec/spec_helper.rb",
+     "spec/string_ext_spec.rb",
      "spec/time_ext_spec.rb",
      "test/helper.rb",
      "test/test_business_days.rb",
@@ -68,6 +70,7 @@ Gem::Specification.new do |s|
      "spec/float_ext_spec.rb",
      "spec/hash_ext_spec.rb",
      "spec/spec_helper.rb",
+     "spec/string_ext_spec.rb",
      "spec/time_ext_spec.rb",
      "test/helper.rb",
      "test/test_business_days.rb",

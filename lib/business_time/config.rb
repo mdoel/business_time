@@ -38,8 +38,8 @@ module BusinessTime
       
       # default business time blocks
       self.business_hours = {
-        :Monday => ['09:00 - 12:00', '15:00 - 18:00'],
-        :Friday => ['09:00 - 12:00', '15:00 - 18:00'] 
+        :Monday => ['07:00 - 12:00', '15:00 - 18:00'],
+        :Friday => ['07:00 - 12:00', '15:00 - 18:00'] 
       }
       
       
