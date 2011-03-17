@@ -23,8 +23,10 @@ class Time
     # True if this time is on a workday (between 00:00:00 and 23:59:59), even if
     # this time falls outside of normal business hours.
     def workday?(day)
-      Time.weekday?(day) &&
-      !BusinessTime::Config.holidays.include?(day.to_date)
+      # Time.weekday?(day) &&
+      # !BusinessTime::Config.holidays.include?(day.to_date)
+      day_sym = [:Sunday, :Monday, :Tuesday, :Wednesday, :Thursday, :Friday, :Saturday][day.wday]
+      BusinessTime::Config.business_hours.keys.include? day_sym
     end
 
     # True if this time falls on a weekday.

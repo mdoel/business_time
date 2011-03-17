@@ -21,9 +21,13 @@ module BusinessTime
       
       from = blocks.include_date?(date_time).first
       after = after_block.first
-      
-      if ((from && !after) || !(from || after))
-        roll_to_workday(after_block.last)
+
+      if from && !after
+        paused_minutes = after_time - blocks.include_date?(date_time).last
+        roll_to_workday(after_block.last) + paused_minutes
+
+      elsif !(from || after)
+        roll_to_workday(after_block.last) + @minutes
 
       elsif !from && after
         roll_to_workday(after_block.first)
@@ -43,7 +47,7 @@ module BusinessTime
       end
       next_block
     end
-    
+
   end
 
 
