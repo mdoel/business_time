@@ -31,15 +31,20 @@ module BusinessTime
     end
     
     def self.reset
-      Time.zone = 'Berlin'
+      Time.zone = 'EST'
       self.holidays = []
       self.beginning_of_workday = "9:00 am"
       self.end_of_workday = "5:00 pm"
       
       # default business time blocks
       self.business_hours = {
-        :Monday => ['07:00 - 12:00', '15:00 - 18:00'],
-        :Friday => ['07:00 - 12:00', '15:00 - 18:00'] 
+        :Monday => ['10:00 - 22:00'],
+        :Monday => ['10:00 - 22:00'],
+        :Monday => ['10:00 - 22:00'],
+        :Monday => ['10:00 - 22:00'],
+        :Monday => ['10:00 - 22:00'],
+        :Monday => ['09:00 - 21:00'],
+        :Monday => ['09:00 - 21:00']
       }
       
       
